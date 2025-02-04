@@ -1,0 +1,86 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import { Icon } from "astro-icon/components";
+
+// Get all scholarship entries and filter out drafts
+const publishedScholarshipEntries = await getCollection("scholarship", ({ data }) => {
+  return !data.draft;
+});
+
+// Sort content entries by deadline
+publishedScholarshipEntries.sort((a, b) => {
+  return a.data.deadline.valueOf() - b.data.deadline.valueOf();
+});
+
+// Format currency
+const formatAmount = (amount: string) => {
+  return amount.startsWith('$') ? amount : `$${amount}`;
+};
+
+// Format date for display
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+};
+---
+
+<Layout title="Available Scholarships">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Available Scholarships</Fragment>
+      <Fragment slot="desc">
+        Explore our current scholarship opportunities and find the support you need for your education.
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-16 mx-auto max-w-6xl">
+      {publishedScholarshipEntries.map((scholarshipEntry) => (
+        <div class="relative flex flex-col rounded-lg bg-white px-6 py-5 border border-gray-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2">
+          <div class="min-w-0 flex-1">
+            <a href={`/scholarship/${scholarshipEntry.slug}`} class="focus:outline-none">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-medium text-blue-500 uppercase">
+                  {scholarshipEntry.data.fundingType}
+                </span>
+                <span class="text-gray-300">•</span>
+                <span class="text-sm font-semibold text-emerald-600">
+                  {formatAmount(scholarshipEntry.data.amount)}
+                </span>
+              </div>
+              <p class="text-lg font-medium text-gray-900 mt-1">
+                {scholarshipEntry.data.title}
+              </p>
+              <p class="text-sm text-gray-500 mt-1 line-clamp-2">
+                {scholarshipEntry.data.snippet}
+              </p>
+              
+              <div class="flex items-center gap-4 mt-3 text-sm text-gray-500 flex-wrap">
+                <div class="flex items-center min-w-0">
+                  <Icon name="bx:home" class="w-4 h-4 text-gray-400 shrink-0 mr-1.5" />
+                  <span class="truncate">{scholarshipEntry.data.provider}</span>
+                </div>
+                <div class="flex items-center min-w-0">
+                  <Icon name="bx:map" class="w-4 h-4 text-gray-400 shrink-0 mr-1.5" />
+                  <span class="truncate">{scholarshipEntry.data.location}</span>
+                </div>
+                <div class="flex items-center min-w-0">
+                  <Icon name="bx:calendar" class="w-4 h-4 text-gray-400 shrink-0 mr-1.5" />
+                  <time datetime={scholarshipEntry.data.deadline.toISOString()} class="truncate">
+                    {formatDate(scholarshipEntry.data.deadline)}
+                  </time>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Layout>

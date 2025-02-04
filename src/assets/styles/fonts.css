@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-thinitalic.otf') format('opentype');
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-extralight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-extralightitalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-lightitalic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-semibolditalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-bolditalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-extrabold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-extrabolditalic.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-heavy.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Commuters Sans';
+    src: url('/src/assets/font/commuterssans-heavyitalic.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+  }

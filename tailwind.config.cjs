@@ -5,12 +5,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "Bricolage Grotesque Variable",
-          "Inter Variable",
-          "Inter",
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ["commuters-sans", ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        primary: '#7B32BA',
+      },
+      fontWeight: {
+        thin: 100,
+        extralight: 200,
+        light: 300,
+        normal: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
+        extrabold: 800,
+        black: 900,
       },
     },
   },

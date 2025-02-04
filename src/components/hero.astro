@@ -10,7 +10,7 @@ import { Icon } from "astro-icon/components";
   <div class="py-6 md:order-1 hidden md:block">
     <Picture
       src={heroImage}
-      alt="Astronaut in the air"
+      alt="a happy student"
       widths={[200, 400, 600]}
       sizes="(max-width: 800px) 100vw, 620px"
       loading="eager"
@@ -19,13 +19,11 @@ import { Icon } from "astro-icon/components";
   </div>
   <div>
     <h1
-      class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
-      Marketing website done with Astro
+      class=" text-dark text-5xl lg:text-6xl xl:text-7xl font-semibold ">
+      Empowering Dreams Through Education
     </h1>
-    <p class="text-lg mt-4 text-slate-600 max-w-xl">
-      Astroship is a starter template for startups, marketing websites & landing
-      pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly
-      create any website with this starter.
+    <p class="text-lg mt-12 text-slate-600 max-w-xl">
+      We believe in the transformative power of education to unlock potential and create lasting impact. From scholarship assistance to project-based learning and tailored tutoring, our focus is to bridge gaps and empower individuals with the tools they need to succeed. Join us in shaping a future where education fuels innovation, opportunity, and lasting change.
     </p>
     <div class="mt-6 flex flex-col sm:flex-row gap-3">
       <Link
@@ -34,9 +32,8 @@ import { Icon } from "astro-icon/components";
         target="_blank"
         class="flex gap-1 items-center justify-center"
         rel="noopener">
-        <Icon class="text-white w-5 h-5" name="bx:bxs-cloud-download" />
-
-         Download for Free
+        <Icon class="text-white w-5 h-5" name="bx:bxs-calendar" />
+         Schedule a Call
       </Link>
       <Link
         size="lg"
@@ -45,8 +42,8 @@ import { Icon } from "astro-icon/components";
         href="https://github.com/surjithctly/astroship"
         class="flex gap-1 items-center justify-center"
         target="_blank">
-        <Icon class="text-black w-4 h-4" name="bx:bxl-github" />
-         GitHub Repo
+        <Icon class="text-black w-4 h-4" name="bx:bx-info-circle" />
+         Learn more
       </Link>
     </div>
   </div>

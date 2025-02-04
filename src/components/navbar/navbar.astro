@@ -1,89 +1,208 @@
 ---
 import Container from "@components/container.astro";
+import logo from "assets/logo.svg";
+import { Picture } from "astro:assets";
 import Link from "@components/ui/link.astro";
-import Dropdown from "./dropdown.astro";
-import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
+// Navigation items (used only for rendering, not in client JS)
 const menuitems = [
   {
-    title: "Features",
+    title: "More Services",
     path: "#",
     children: [
-      { title: "Action", path: "/" },
-      { title: "Another action", path: "#" },
-      { title: "Dropdown Submenu", path: "#" },
-      { title: "404 Page", path: "/404" },
+      { title: "Tutors", path: "/" },
+      { title: "Addmision Assistance", path: "#" },
+      { title: "Resources and Tips", path: "#" },
     ],
   },
-  {
-    title: "Pricing",
-    path: "/pricing",
-  },
-  {
-    title: "About",
-    path: "/about",
-  },
-  {
-    title: "Blog",
-    path: "/blog",
-  },
-  {
-    title: "Contact",
-    path: "/contact",
-  },
+  { title: "About", path: "/about" },
+  { title: "Blog", path: "/blog" },
+  { title: "Scholarship", path: "/scholarship" },
+  { title: "Contact", path: "/contact" },
 ];
 ---
 
 <Container>
-  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
-    <Astronav>
-      <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
-          ><span class="font-bold text-slate-800">Astro</span><span
-            class="text-slate-500">ship</span
-          >
+  <header class="bg-white">
+    <nav aria-label="Global" class="flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <!-- Logo -->
+      <div class="flex lg:flex-1">
+        <a href="/" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <Picture
+            src={logo}
+            alt="Company logo"
+            widths={[200, 400, 600]}
+            sizes="(max-width: 800px) 100vw, 620px"
+            loading="eager"
+            format="avif"
+            class="h-10 w-auto"
+          />
         </a>
-        <div class="block lg:hidden">
-          <MenuIcon class="w-4 h-4 text-gray-800" />
-        </div>
       </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-        <ul class="flex flex-col lg:flex-row lg:gap-3">
-          {
-            menuitems.map((item, index) => (
-              <>
-                {item.children && (
-                  <Dropdown
-                    title={item.title}
-                    children={item.children}
-                    lastItem={index === menuitems.length - 1}
-                  />
-                )}
 
-                {!item.children && (
-                  <li>
+      <!-- Mobile menu button -->
+      <div class="flex lg:hidden">
+        <button id="open-mobile-menu" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop navigation -->
+      <div class="hidden lg:flex lg:gap-x-8">
+        {menuitems.map((item) =>
+          item.children ? (
+            <div class="relative">
+              <button
+                id={`${item.title}-dropdown-button`}
+                class="flex items-center gap-x-1 text-sm font-semibold text-gray-900"
+              >
+                {item.title}
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+              <div id={`${item.title}-dropdown-panel`} class="hidden absolute left-0 top-full z-10 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-gray-900/5">
+                <div class="py-1">
+                  {item.children.map((child) => (
                     <a
-                      href={item.path}
-                      class="flex lg:px-3 py-2 items-center text-gray-600 hover:text-gray-900">
-                      <span> {item.title}</span>
+                      href={child.path}
+                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      {child.title}
                     </a>
-                  </li>
-                )}
-              </>
-            ))
-          }
-        </ul>
-        <div class="lg:hidden flex items-center mt-3 gap-4">
-          <Link href="#" style="muted" block size="md">Log in</Link>
-          <Link href="#" size="md" block>Sign up</Link>
-        </div>
-      </MenuItems>
-    </Astronav>
-    <div>
-      <div class="hidden lg:flex items-center gap-4">
-        <a href="#">Log in</a>
-        <Link href="#" size="md">Sign up</Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.path}
+              class="text-sm font-semibold text-gray-900 hover:text-gray-700"
+            >
+              {item.title}
+            </a>
+          )
+        )}
+      </div>
+
+      <!-- Login -->
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <a href="#" class="text-sm font-semibold text-gray-900">
+          Log in <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 hidden">
+      <div class="flex items-center justify-between">
+        <a href="/" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <Picture
+            src={logo}
+            alt="Company logo"
+            widths={[200, 400, 600]}
+            sizes="(max-width: 800px) 100vw, 620px"
+            loading="eager"
+            format="avif"
+            class="h-8 w-auto"
+          />
+        </a>
+        <button id="close-mobile-menu" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <nav class="mt-6 space-y-4">
+        {menuitems.map((item) =>
+          item.children ? (
+            <div>
+              <button
+                id={`mobile-${item.title}-button`}
+                class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+              >
+                {item.title}
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+              <div id={`mobile-${item.title}-panel`} class="hidden mt-2 space-y-2">
+                {item.children.map((child) => (
+                  <a
+                    href={child.path}
+                    class="block rounded-md px-6 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                  >
+                    {child.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.path}
+              class="block rounded-md px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+            >
+              {item.title}
+            </a>
+          )
+        )}
+      </nav>
+      <div class="mt-6">
+        <a href="#" class="block rounded-md px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">
+          Log in
+        </a>
       </div>
     </div>
   </header>
 </Container>
+
+<!-- Inline script for toggling menus -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    document.getElementById('open-mobile-menu').addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+    });
+    document.getElementById('close-mobile-menu').addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+
+    // Desktop dropdown toggles
+    const dropdownButtons = document.querySelectorAll('[id$="-dropdown-button"]');
+    dropdownButtons.forEach((button) => {
+      const panelId = button.id.replace('-dropdown-button', '-dropdown-panel');
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          panel.classList.toggle('hidden');
+        });
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!button.contains(e.target) && !panel.contains(e.target)) {
+            panel.classList.add('hidden');
+          }
+        });
+      }
+    });
+
+    // Mobile dropdown toggles
+    const mobileDropdownButtons = document.querySelectorAll('button[id^="mobile-"][id$="-button"]');
+    mobileDropdownButtons.forEach((button) => {
+      const panelId = button.id.replace('-button', '-panel');
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        button.addEventListener('click', () => {
+          panel.classList.toggle('hidden');
+        });
+      }
+    });
+  });
+</script>

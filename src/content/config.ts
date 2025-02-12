@@ -42,6 +42,45 @@ const scholarshipSchema = z.object({
   }),
 });
 
+// Tutor-specific schema
+const tutorSchema = z.object({
+  draft: z.boolean(),
+  name: z.string(),
+  title: z.string(),
+  image: z.object({
+    src: z.string(),
+    alt: z.string(),
+  }),
+  publishDate: z.string().transform(str => new Date(str)),
+  credentials: z.array(z.string()),
+  specialties: z.array(z.string()),
+  availability: z.object({
+    monday: z.string().optional(),
+    tuesday: z.string().optional(),
+    wednesday: z.string().optional(),
+    thursday: z.string().optional(),
+    friday: z.string().optional(),
+    saturday: z.string().optional(),
+    sunday: z.string().optional()
+  }),
+  rates: z.object({
+    individual: z.string(),
+    group: z.string().optional()
+  }),
+  languages: z.array(z.string()),
+  contact: z.object({
+    email: z.string().email(),
+    phone: z.string().optional(),
+    zoom: z.string().optional()
+  }),
+  bio: z.string(),
+  achievements: z.array(z.string()).optional(),
+  testimonials: z.array(z.object({
+    author: z.string(),
+    text: z.string()
+  })).optional()
+});
+
 // 3. Define your collection(s)
 const blogCollection = defineCollection({
   schema: blogSchema,
@@ -64,10 +103,15 @@ const teamCollection = defineCollection({
   }),
 });
 
+const tutorCollection = defineCollection({
+  schema: tutorSchema,
+});
+
 // 4. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
   'blog': blogCollection,
   'scholarship': scholarshipCollection,
   'team': teamCollection,
+  'tutor': tutorCollection,
 };

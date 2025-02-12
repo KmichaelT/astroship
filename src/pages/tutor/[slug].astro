@@ -1,0 +1,181 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import { Icon } from "astro-icon/components";
+
+// Generate static paths for all tutors
+export async function getStaticPaths() {
+  const tutorEntries = await getCollection("tutor");
+  return tutorEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+// Provide a type for your Astro.props so that TypeScript knows about 'entry'
+type TutorProps = {
+  entry: {
+    data: {
+      name: string;
+      title: string;
+      image: { src: string; alt: string };
+      contact: { email: string; phone?: string; zoom?: string };
+      credentials: string[];
+      languages: string[];
+      rates: { individual: string; group?: string };
+      bio: string;
+      specialties: string[];
+      availability: { [day: string]: string | undefined };
+      testimonials?: { text: string; author: string }[];
+    };
+    render: () => Promise<{ Content: unknown }>;
+  };
+};
+
+const { entry } = Astro.props as TutorProps;
+const { Content } = await entry.render();
+
+// Format availability schedule
+const formatSchedule = (schedule: { [key: string]: string | undefined }) => {
+  return Object.entries(schedule)
+    .filter(([_, time]) => time)
+    .map(([day, time]) => ({
+      day: day.charAt(0).toUpperCase() + day.slice(1),
+      time,
+    }));
+};
+
+const schedule = formatSchedule(entry.data.availability);
+
+<Layout title={entry.data.name}>
+  <Container>
+    <div class="mx-auto max-w-4xl mt-14">
+      <div class="grid md:grid-cols-2 gap-10 mx-auto">
+        
+        <div class="aspect-square w-full rounded-md shadow-lg overflow-hidden">
+          <Picture
+    src={entry.data.image.src}
+    alt={entry.data.image.alt}
+    sizes="(max-width: 800px) 100vw, 400px"
+    widths={[400, 800]}
+    fit="cover"
+    position="center"
+  />
+          
+          <div class="mt-8 space-y-4">
+            <h2 class="text-xl font-semibold">Contact Information</h2>
+            <div class="space-y-2">
+              <a 
+                href={`mailto:${entry.data.contact.email}`}
+                class="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                <Icon name="mdi:email" class="w-5 h-5" />
+                {entry.data.contact.email}
+              </a>
+              {entry.data.contact.phone && (
+                <a 
+                  href={`tel:${entry.data.contact.phone}`}
+                  class="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                  <Icon name="mdi:phone" class="w-5 h-5" />
+                  {entry.data.contact.phone}
+                </a>
+              )}
+              {entry.data.contact.zoom && (
+                <p class="flex items-center gap-2 text-gray-600">
+                  <Icon name="mdi:video" class="w-5 h-5" />
+                  Zoom: {entry.data.contact.zoom}
+                </p>
+              )}
+            </div>
+          </div>
+        </div> 
+
+        <div class="space-y-6">
+          <h1 class="text-4xl font-bold">{entry.data.name}</h1>
+          <p class="text-xl text-gray-600">{entry.data.title}</p>
+
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Credentials</h2>
+            <ul class="list-disc list-inside space-y-1">
+              {entry.data.credentials.map((credential) => (
+                <li>{credential}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Languages</h2>
+            <div class="flex gap-2">
+              {entry.data.languages.map((language) => (
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                  {language}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Rates</h2>
+            <p>Individual: {entry.data.rates.individual}</p>
+            {entry.data.rates.group && (
+              <p>Group: {entry.data.rates.group}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="mt-12 space-y-8">
+        
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">About</h2>
+          <div class="prose max-w-none">
+            {entry.data.bio}
+          </div>
+        </div>
+
+        
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Specialties</h2>
+          <div class="grid grid-cols-2 gap-4">
+            {entry.data.specialties.map((specialty) => (
+              <div class="flex items-center gap-2">
+                <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500" />
+                {specialty}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Weekly Availability</h2>
+          <div class="grid grid-cols-2 gap-4">
+            {schedule.map(({ day, time }) => (
+              <div class="flex items-center gap-2">
+                <Icon name="mdi:calendar" class="w-5 h-5" />
+                <span class="font-medium">{day}:</span> {time}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        
+        {entry.data.testimonials && (
+          <div>
+            <h2 class="text-2xl font-semibold mb-4">Student Testimonials</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              {entry.data.testimonials.map((testimonial) => (
+                <div class="bg-gray-50 p-6 rounded-lg">
+                  <p class="italic mb-4">"{testimonial.text}"</p>
+                  <p class="font-medium">- {testimonial.author}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </Container>
+</Layout> 

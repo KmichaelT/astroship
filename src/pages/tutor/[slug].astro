@@ -46,7 +46,7 @@ function formatAvailability(availability) {
           <div class="mt-6 space-y-4">
             <div class="flex gap-2">
               <h1 class="text-4xl font-bold">{entry.data.name}</h1>
-              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full flex items-center justify-center">
+              <span class="bg-green-100 text-green-800 px-3 py-1 max-h-10 rounded-full flex items-center justify-center">
                 Available
               </span>
             </div>
@@ -78,7 +78,7 @@ function formatAvailability(availability) {
         <div class="md:col-span-8 space-y-8 ">
           <div class="prose prose-lg max-w-none">
             <h2 class="text-2xl font-semibold mb-4">About {entry.data.name}</h2>
-            <p>{entry.data.bio}</p>
+            <p class="text-md">{entry.data.bio}</p>
           </div>
           {/* Specialties */}
           <div>

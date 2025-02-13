@@ -5,9 +5,8 @@ import Link from "@components/ui/link.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<main
-  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24">
-  <div class="py-6 md:order-1 hidden lg:block">
+<main class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 h-fit">
+  <div class="py-6 md:order-1 hidden lg:block scale-90">
     <Picture
       src={heroImage}
       alt="a happy student"
@@ -18,8 +17,7 @@ import { Icon } from "astro-icon/components";
     />
   </div>
   <div>
-    <h1
-      class=" text-dark text-5xl lg:text-6xl xl:text-6xl font-bold  ">
+    <h1 class="text-dark text-5xl lg:text-6xl xl:text-6xl font-bold">
       Educate. Empower. Actualize.
     </h1>
     <p class="text-lg mt-10 text-slate-600 max-w-xl">

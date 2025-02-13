@@ -16,10 +16,7 @@ credentials:
 specialties:
   - "Advanced Calculus"
   - "Linear Algebra"
-  - "Algorithm Design"
-  - "Python Programming"
-  - "Data Structures"
-  - "Machine Learning Fundamentals"
+  - "Algorithm Design" 
 
 availability:
   monday: "9:00 AM - 5:00 PM EST"

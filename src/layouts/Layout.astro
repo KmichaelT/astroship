@@ -5,8 +5,6 @@ import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
 import '@fontsource-variable/bricolage-grotesque';
 
-
-
 export interface Props {
   title: string;
 }
@@ -21,50 +19,51 @@ const resolvedImageWithDomain = new URL(
 const { title } = Astro.props;
 
 const makeTitle = title
-  ? title + " | " + "Astroship"
-  : "Astroship - Starter Template for Astro with Tailwind CSS";
+  ? title + " | " + "Edupreneur"
+  : "Edupreneur - Educate. Empower. Actualize.";
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- <link rel="stylesheet" href="/src/assets/styles/fonts.css"> -->
     <link rel="stylesheet" href="https://use.typekit.net/qol7waa.css">
     <meta name="generator" content={Astro.generator} />
 
-    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <SEO
       title={makeTitle}
-      description="Astroship is a starter website template for Astro built with TailwindCSS."
+      description="Edupreneur bridges educational gaps through scholarship assistance, tutoring services, financial aid, and project-based learning opportunities. We empower individuals to become successful entrepreneurs, innovators, and leaders."
       canonical={canonicalURL}
       twitter={{
-        creator: "@surjithctly",
-        site: "@web3templates",
+        creator: "@edupreneur",
+        site: "@edupreneur",
         card: "summary_large_image",
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Astroship - Starter Template for Astro`,
+          title: `Edupreneur - Transforming Education Into Opportunity`,
           image: resolvedImageWithDomain,
         },
         image: {
-          alt: "Astroship Homepage Screenshot",
+          alt: "Edupreneur Homepage",
         },
+        optional: {
+          description: "Comprehensive educational support including scholarship guidance, specialized tutoring, financial aid, and real-world project opportunities to foster innovation and entrepreneurship.",
+          locale: "en_US",
+          siteName: "Edupreneur"
+        }
       }}
     />
   </head>
-  <body>
+  <body class="flex min-h-screen flex-col">
     <Navbar />
     <slot />
     <Footer />
     <style is:global>
-      /* Improve Page speed */
-      /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {
         content-visibility: auto;
       }

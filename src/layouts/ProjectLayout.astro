@@ -1,0 +1,146 @@
+---
+import { type CollectionEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  project?: CollectionEntry<"project">;
+}
+
+const { title, project } = Astro.props;
+const pageTitle = title || project?.data.title || "Project";
+
+// Format date for display
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+};
+---
+
+<Layout title={pageTitle}>
+  <Container>
+    <div class="mx-auto max-w-6xl text-left mt-8">
+      {project ? (
+        <div class="mb-12">
+          <!-- Breadcrumb -->
+          <nav class="flex my-16" aria-label="Breadcrumb">
+            <ol class="flex flex-wrap items-center space-x-1 md:space-x-2 text-sm">
+              <li class="inline-flex items-center">
+                <a href="/" class="text-gray-600 hover:text-blue-600 inline-flex items-center">
+                  <Icon name="bx:home" class="w-4 h-4 mr-1"/>
+                  <span class="hidden sm:inline">Home</span>
+                </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <Icon name="bx:chevron-right" class="w-4 h-4 text-gray-400"/>
+                  <a href="/project" class="ml-1 text-gray-600 hover:text-blue-600 md:ml-2">
+                    <span class="hidden sm:inline">Projects</span>
+                    <span class="sm:hidden">...</span>
+                  </a>
+                </div>
+              </li>
+              <li aria-current="page">
+                <div class="flex items-center">
+                  <Icon name="bx:chevron-right" class="w-4 h-4 text-gray-400"/>
+                  <span class="ml-1 text-gray-500 md:ml-2 line-clamp-1 max-w-[200px] sm:max-w-xs">
+                    {project.data.title}
+                  </span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+
+          <!-- Hero -->
+          <div class="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl overflow-hidden">
+            <div class="relative p-6 sm:p-8 md:p-10">
+              <!-- Top Content -->
+              <div class="flex flex-col md:flex-row gap-6 md:items-center mb-6">
+                <div class="flex-1 min-w-0">
+                  <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                    {project.data.title}
+                  </h1>
+                  <p class="text-lg text-gray-600">{project.data.snippet}</p>
+                </div>
+              </div>
+
+              <!-- Quick Stats -->
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                {/* Category */}
+                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100">
+                  <div class="flex items-start gap-3">
+                    <div class="shrink-0 bg-purple-100 p-2 rounded-md">
+                      <Icon name="bx:category" class="w-5 h-5 text-purple-600"/>
+                    </div>
+                    <div>
+                      <p class="text-gray-500">Category</p>
+                      <p class="font-medium text-gray-900">{project.data.category}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Project Type */}
+                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100">
+                  <div class="flex items-start gap-3">
+                    <div class="shrink-0 bg-blue-100 p-2 rounded-md">
+                      <Icon name="bx:cube" class="w-5 h-5 text-blue-600"/>
+                    </div>
+                    <div>
+                      <p class="text-gray-500">Project Type</p>
+                      <p class="font-medium text-gray-900">{project.data.projectType}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status */}
+                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100">
+                  <div class="flex items-start gap-3">
+                    <div class="shrink-0 bg-green-100 p-2 rounded-md">
+                      <Icon name="bx:check-circle" class="w-5 h-5 text-green-600"/>
+                    </div>
+                    <div>
+                      <p class="text-gray-500">Status</p>
+                      <p class="font-medium text-gray-900">{project.data.status}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <!-- Main Content -->
+      <main class="relative">
+        <slot />
+      </main>
+
+      <!-- Footer Actions -->
+      {project && (
+        <div class="sticky bottom-0 bg-white/80 backdrop-blur-sm border-t border-gray-100 py-4 px-6 -mx-6">
+          <div class="flex flex-wrap gap-4 justify-center max-w-4xl mx-auto">
+            <a
+              href="#skills"
+              class="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 shadow-sm">
+              <Icon name="bx:user-plus" class="w-5 h-5"/>
+              Join Project
+            </a>
+            <a
+              href="/project"
+              class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-lg hover:bg-gray-200 transition-colors inline-flex items-center gap-2">
+              <Icon name="bx:arrow-back" class="w-5 h-5"/>
+              Back to Projects
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  </Container>
+</Layout>

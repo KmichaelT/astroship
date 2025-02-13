@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import { Icon } from "astro-icon/components";
+
+// Get all project entries and filter out drafts
+const publishedProjectEntries = await getCollection("project", (entry) => {
+  return !entry.data.draft;
+});
+
+// Sort content entries by publishDate
+publishedProjectEntries.sort((a, b) => {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+---
+
+<Layout title="Student Innovation Projects">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Student Innovation Projects</Fragment>
+      <Fragment slot="desc">
+        Explore innovative student-led projects and find opportunities to contribute to real-world solutions.
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-16 mx-auto max-w-6xl">
+      {publishedProjectEntries.map((projectEntry) => (
+        <div class="relative flex flex-col rounded-lg bg-white px-6 py-5 border border-gray-200 hover:border-blue-200 transition-colors">
+          <div class="min-w-0 flex-1">
+            <a href={`/project/${projectEntry.slug}`} class="focus:outline-none">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              
+              {/* Title and Description */}
+              <h3 class="text-lg font-medium text-blue-600 mb-2">
+                {projectEntry.data.title}
+              </h3>
+              <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                {projectEntry.data.snippet}
+              </p>
+
+              {/* Category, Project Type, and Status */}
+              <div class="flex flex-wrap gap-3">
+                <div class="flex items-center gap-2">
+                  <Icon name="bx:category" class="w-5 h-5 text-purple-600" />
+                  <div>
+                    <span class="font-medium text-sm  text-gray-900 ml-1">{projectEntry.data.category}</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Icon name="bx:cube" class="w-5 h-5 text-blue-600" />
+                  <div>
+                    <span class="font-medium text-sm text-gray-900 ml-1">{projectEntry.data.projectType}</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Icon name="bx:check-circle" class="w-5 h-5 text-green-600" />
+                  <div>
+                    <span class="font-medium text-sm text-gray-900 ml-1">{projectEntry.data.status}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Layout>

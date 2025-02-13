@@ -164,3 +164,79 @@ TailwindCSS is already configured in this repo, so you can start using it withou
 Feel free to check out [Astro Docs](https://docs.astro.build) or jump into our [Discord Chat](https://web3templates.com/discord).
 
 [![Built with Astro](https://astro.badg.es/v1/built-with-astro.svg)](https://astro.build)
+
+```
+astroship
+├─ .npmrc
+├─ .prettierrc
+├─ LICENSE
+├─ README.md
+├─ astro.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ pnpm-lock.yaml
+├─ public
+│  ├─ avatars
+│  │  └─ john-smith.jpg
+│  ├─ favicon.svg
+│  ├─ opengraph.jpg
+│  └─ robots.txt
+├─ src
+│  ├─ assets
+│  │  ├─ font
+│  │  │  ├─ commuterssans-bold.otf
+│  │  │  ├─ commuterssans-bolditalic.otf
+│  │  │  ├─ commuterssans-extrabold.otf
+│  │  │  ├─ commuterssans-extrabolditalic.otf
+│  │  │  ├─ commuterssans-extralight.otf
+│  │  │  ├─ commuterssans-extralightitalic.otf
+│  │  │  ├─ commuterssans-heavy.otf
+│  │  │  ├─ commuterssans-heavyitalic.otf
+│  │  │  ├─ commuterssans-italic.otf
+│  │  │  ├─ commuterssans-light.otf
+│  │  │  ├─ commuterssans-lightitalic.otf
+│  │  │  ├─ commuterssans-regular.otf
+│  │  │  ├─ commuterssans-semibold.otf
+│  │  │  ├─ commuterssans-semibolditalic.otf
+│  │  │  ├─ commuterssans-thin.otf
+│  │  │  └─ commuterssans-thinitalic.otf
+│  │  ├─ hero-alt.png
+│  │  ├─ hero-source.svg
+│  │  ├─ hero.png
+│  │  ├─ logo.svg
+│  │  └─ styles
+│  │     └─ fonts.css
+│  ├─ components
+│  │  ├─ navbar
+│  │  └─ ui
+│  │     └─ icons
+│  │        └─ index.js
+│  ├─ content
+│  │  ├─ blog
+│  │  │  ├─ complete-guide-fullstack-development.md
+│  │  │  ├─ essential-data-structures-algorithms.md
+│  │  │  ├─ how-to-become-frontend-master.md
+│  │  │  └─ kitchensink.mdx
+│  │  ├─ config.ts
+│  │  ├─ scholarship
+│  │  │  ├─ Scholarship1.md
+│  │  │  ├─ Scholarship2.md
+│  │  │  └─ Scholarship3.md
+│  │  ├─ team
+│  │  │  ├─ janette-lynch.md
+│  │  │  ├─ marcell-ziemann.md
+│  │  │  └─ robert-palmer.md
+│  │  └─ tutor
+│  │     └─ john-smith.md
+│  ├─ env.d.ts
+│  ├─ layouts
+│  ├─ pages
+│  │  ├─ blog
+│  │  ├─ scholarship
+│  │  └─ tutor
+│  └─ utils
+│     └─ all.js
+├─ tailwind.config.cjs
+└─ tsconfig.json
+
+```

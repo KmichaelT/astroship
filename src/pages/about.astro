@@ -14,21 +14,50 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
 <Layout title="About">
   <Container>
     <Sectionhead>
-      <Fragment slot="title">About</Fragment>
-      <Fragment slot="desc">We are a small passionate team.</Fragment>
+      <Fragment slot="title">About Us</Fragment>
+      <Fragment slot="desc">Bridging Educational Gaps, Building Future Leaders</Fragment>
     </Sectionhead>
 
     <div class="flex flex-col gap-3 mx-auto max-w-6xl mt-16">
-      <h2 class= " text-dark font-bold text-3xl text-gray-800">
-        Empowering the world with Astro.
+      <h2 class="text-dark font-bold text-3xl text-gray-800">
+        Our Mission and Vision
       </h2>
       <p class="text-lg leading-relaxed text-slate-500">
-        We're a multi-cultural team from around the world! We come from diverse
-        backgrounds, bringing different personalities, experiences and skills to
-        the job. This is what makes our team so special.
+        We believe in the transformative power of education to drive long-term economic and social progress. 
+        Our mission is to bridge gaps in access to education and equip young minds with the knowledge and 
+        skills they need to become successful entrepreneurs, innovators, and leaders.
+      </p>
+      <p class="text-lg leading-relaxed text-slate-500 mt-4">
+        Our vision is to create a country where education is the cornerstone of opportunity, enabling 
+        individuals to build prosperous futures for themselves and their communities. We aim to see a 
+        generation that leverages education as a tool for creativity, entrepreneurship, and positive 
+        societal impact.
       </p>
     </div>
-    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-6xl mt-12">
+
+    <div class="flex flex-col gap-3 mx-auto max-w-6xl mt-12">
+      <h2 class="text-dark font-bold text-2xl text-gray-800">
+        Our Approach
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We provide comprehensive support through scholarship guidance, specialized tutoring, 
+        financial aid, and practical project-based learning opportunities. Our holistic approach 
+        ensures that students receive not just academic support, but also develop real-world skills 
+        essential for their future success.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3 mx-auto max-w-6xl mt-12">
+      <h2 class="text-dark font-bold text-2xl text-gray-800">
+        Meet Our Team
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500 mb-8">
+        Our dedicated team brings together diverse expertise in education, mentorship, and student development. 
+        Each member is committed to our mission of making quality education accessible to all.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-6xl mt-8">
       {
         publishedTeamMembers.map((teamMemberEntry) => (
           <div class="group">
@@ -44,8 +73,10 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
             </div>
 
             <div class="mt-4 text-center">
-              <h2 class= " text-dark text-lg text-gray-800">{teamMemberEntry.data.name}</h2>
-              <h3 class= " text-dark text-sm text-slate-500">
+              <h2 class="text-dark text-lg text-gray-800">
+                {teamMemberEntry.data.name}
+              </h2>
+              <h3 class="text-dark text-sm text-slate-500">
                 {teamMemberEntry.data.title}
               </h3>
             </div>

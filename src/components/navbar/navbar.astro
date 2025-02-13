@@ -6,7 +6,11 @@ import Link from "@components/ui/link.astro";
 
 // Navigation items (used only for rendering, not in client JS)
 const menuitems = [
-  {
+
+  { title: "Scholarships", path: "/scholarship" },
+  { title: "Projects", path: "/project" },
+  
+    {
     title: "More Services",
     path: "#",
     children: [
@@ -16,17 +20,15 @@ const menuitems = [
     ],
   },
   { title: "About", path: "/about" },
-  { title: "Blog", path: "/blog" },
-  { title: "Scholarship", path: "/scholarship" },
   { title: "Contact", path: "/contact" },
 ];
 ---
 
 <Container>
   <header class="bg-white">
-    <nav aria-label="Global" class="flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8 w-full">
       <!-- Logo -->
-      <div class="flex lg:flex-1">
+      <div class="flex lg:flex-none">
         <a href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
           <Picture
@@ -52,7 +54,7 @@ const menuitems = [
       </div>
 
       <!-- Desktop navigation -->
-      <div class="hidden lg:flex lg:gap-x-8">
+      <div class="hidden lg:flex lg:gap-x-8 lg:items-center">
         {menuitems.map((item) =>
           item.children ? (
             <div class="relative">
@@ -89,15 +91,9 @@ const menuitems = [
         )}
       </div>
 
-      <!-- Login -->
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm font-semibold text-gray-900">
-          Log in <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-    </nav>
+ 
 
-    <!-- Mobile menu -->
+    <!-- Mobile menu (unchanged) -->
     <div id="mobile-menu" class="lg:hidden fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 hidden">
       <div class="flex items-center justify-between">
         <a href="/" class="-m-1.5 p-1.5">
@@ -153,11 +149,6 @@ const menuitems = [
           )
         )}
       </nav>
-      <div class="mt-6">
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">
-          Log in
-        </a>
-      </div>
     </div>
   </header>
 </Container>
